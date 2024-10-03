@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Text Encryptor</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 10px;
+      width: 300px;
+    }
+    textarea, input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    textarea {
+      height: 100px;
+    }
+    button {
+      margin-top: 10px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2>Text Encryptor</h2>
+  <textarea id="plaintext" placeholder="Enter plaintext here..."></textarea>
+  <button id="encryptButton">Encrypt</button>
+  <h3>Encrypted Text:</h3>
+  <textarea id="encryptedText" readonly></textarea>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+

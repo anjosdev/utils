@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Text Encryptor",
+  "version": "1.0",
+  "description": "Encrypts plaintext input using a symmetric key.",
+  "permissions": ["storage"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Encrypt Text"
+  }
+}
+
