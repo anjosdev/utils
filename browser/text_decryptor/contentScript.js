@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
       }
 
       // Convert cipherText from base64 to ArrayBuffer
-      let cipherBuffer = base64ToArrayBuffer(selectedText);
+      let cipherBuffer = await base64ToArrayBuffer(selectedText);
 
       // Assuming the IV is the first 12 bytes
       let iv = cipherBuffer.slice(0, 12);
@@ -66,13 +66,8 @@ chrome.runtime.onMessage.addListener(async (message, sender, sendResponse) => {
   }
 
   // Helper function to convert base64 to ArrayBuffer
-  function base64ToArrayBuffer(base64) {
-    var binary_string = atob(base64);
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = binary_string.charCodeAt(i);
-    }
-    return bytes.buffer;
+  async function base64ToArrayBuffer(base64) {
+    const response = await fetch(`data:application/octet-stream;base64,${base64}`);
+    return await response.arrayBuffer();
   }
 });

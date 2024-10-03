@@ -40,10 +40,8 @@ document.getElementById('encryptButton').addEventListener('click', async () => {
     combined.set(iv);
     combined.set(encryptedArray, iv.length);
 
-    // Convert to Base64 for display
-    const base64Encrypted = btoa(
-      String.fromCharCode.apply(null, combined)
-    );
+    // Convert to Base64 for display using the helper function
+    const base64Encrypted = arrayBufferToBase64(combined);
 
     // Display the encrypted text
     document.getElementById('encryptedText').value = base64Encrypted;
@@ -52,4 +50,17 @@ document.getElementById('encryptButton').addEventListener('click', async () => {
     alert('Encryption failed. See console for details.');
   }
 });
+
+// Helper function to convert ArrayBuffer to Base64
+function arrayBufferToBase64(buffer) {
+  let binary = '';
+  const bytes = new Uint8Array(buffer);
+  const len = bytes.byteLength;
+  const chunkSize = 0x8000; // Use a reasonable chunk size
+  for (let i = 0; i < len; i += chunkSize) {
+    const chunk = bytes.subarray(i, Math.min(i + chunkSize, len));
+    binary += String.fromCharCode.apply(null, chunk);
+  }
+  return btoa(binary);
+}
 
